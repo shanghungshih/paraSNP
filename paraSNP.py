@@ -28,11 +28,11 @@ with open(in_name, 'r') as f:
                     out.writelines(w)
 out.close()
 
-os.system('sudo docker run --rm -v /Users/shanghungshih/Downloads/autoOncotator-master:/data adgh456/parasnp perl annovar/table_annovar.pl data/{}.paraSNP.vcf annovar/humandb/ -buildver hg19 -out data/{}.paraSNP -remove -protocol refGene,ljb26_all -operation g,f -nastring NA -otherinfo'.format(num, num))
+os.system('sudo docker run --rm -v {}:/data adgh456/parasnp perl annovar/table_annovar.pl data/{}.paraSNP.vcf annovar/humandb/ -buildver hg19 -out data/{}.paraSNP -remove -protocol refGene,ljb26_all -operation g,f -nastring NA -otherinfo'.format(path, num, num))
 
 os.system('mv {}/{}.paraSNP.hg19_multianno.txt {}/{}.hg19_multianno.txt'.format(path, num, path, num))
 
-os.system('sudo docker run -itd --rm -v /Users/shanghungshih/Downloads/autoOncotator-master:/data adgh456/parasnp')
+os.system('sudo docker run -itd --rm -v {}:/data adgh456/parasnp'.format(path))
 
 os.system('sudo docker ps -l > ParaSNPid.txt')
 with open('ParaSNPid.txt', 'r') as f:
